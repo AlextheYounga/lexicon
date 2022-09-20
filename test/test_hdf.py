@@ -11,6 +11,7 @@ def test_hdf5_setup():
 
     assert os.path.exists(TEST_HDF5_FILE)
 
+
 def test_hdf5_write():
     """hdf5 file properly writes data and returns array of path and dataset"""
     test_data = {
@@ -32,7 +33,8 @@ def test_hdf5_fetch():
 
     fetched_from_hdf5 = hdf.get('product/description')
 
-    assert test_data['description'] == fetched_from_hdf5
+    assert fetched_from_hdf5 == test_data['description']
+
 
 def test_hdf5_nested_storage():
     """hdf5 file properly fetches data from storage path"""
@@ -45,8 +47,16 @@ def test_hdf5_nested_storage():
 
     fetched_from_hdf5 = hdf.get(f"{test_storage_path}/description")
 
-    assert test_data['description'] == fetched_from_hdf5
+    assert fetched_from_hdf5 == test_data['description']
 
+
+def test_hdf5_fails_to_find_data():
+    """hdf5 file properly handles data that doesn't exist in the file"""
+    hdf = HDF5(TEST_HDF5_FILE)
+
+    fetched_from_hdf5 = hdf.get("data/that/clearly/doesnt/exist")
+
+    assert fetched_from_hdf5 == None
 
 
 

@@ -48,12 +48,16 @@ class HDF5:
             storage_path (string): Path to dataset in hdf5
             key (string): Key to access from path
         """
-        key = storage_path.split('/')[-1]
-        directory = storage_path.replace(key, '')
+        try:
+            key = storage_path.split('/')[-1]
+            directory = storage_path.replace(key, '')
 
-        dset = self.hdf[directory] # Get directory path without key
-        out = dset.attrs[key] # Select key from directory
+            dset = self.hdf[directory] # Get directory path without key
+            out = dset.attrs[key] # Select key from directory
 
-        binary_blob = out.tobytes() # Encode to bytes
-        return binary_blob.decode(ENCODING) # Decode from bytes into string
+            binary_blob = out.tobytes() # Encode to bytes
+            return binary_blob.decode(ENCODING) # Decode from bytes into string
+        except KeyError:
+            return None
+
     
