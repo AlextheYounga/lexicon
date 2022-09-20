@@ -264,3 +264,4 @@ GitHub.sublime-settings
 
 node_modules
 graveyard
+*.hdf5
