@@ -1,0 +1,10 @@
+numpy
+requests
+python-dotenv
+python-environ
+redis
+colored
+python-dateutil
+progressbar2
+nltk
+h5py
